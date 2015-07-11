@@ -1,21 +1,22 @@
-# Currency Detect - a natural language currency code extraction
+# Currency Detect - natural language currency code extraction
 
-A library to detect currency symbols in natural language by use of simple heuristics in rule based system.
+A library to detect currency symbols in natural language by use of simple heuristics in a rule based system.
 
 The rules are as follows:
 
-1. Check if the first three characters of the string is a currency code.
+1. check if the first three characters of the string is a currency code.
 
-2. Check if the currency symbol has a one to one mapping from symbol to currency code i.e ฿ to THB
+2. check if the currency symbol has a one to one mapping from symbol to currency code i.e ฿ to THB
 
-3. Check if the TLD of the url where the text was found has a one to one mapping to currency symbol. i.e .th to THB
+3. check if the TLD of the url where the text was found has a one to one mapping with a currency symbol (i.e .th to THB).
 If more then one country uses the respective currency symbol select the currency with the largest GDP.
-TlDs are excluded if that fit out side the normal bands 85% bands of a log transformed linear model i.e .me
+TLDs are excluded if that they are outside the 90% threshold band of a log transformed linear model of the two variables; GDP and Tld counts (i.e .me .tk).
 
-4. If all fails revert to the USD if text uses a decimal point or to EUR if the text has a decimal comma.
+4. if USD if text uses a decimal point or to EUR if the text has a decimal comma.
 
-This rules are currently a speculative approximation with much room for improvement, suggestions are welcome. 
+5. if all else fails revert to USD
 
+These rules are currently a speculative approximation with much room for improvement, suggestions are welcome. 
 
 ### Resources
 
@@ -33,13 +34,10 @@ This rules are currently a speculative approximation with much room for improvem
   (:require [currencydetect.core :refer [parse-price]))
 
 (parse-price "£20.00" "http://www.r.co.uk")
-=>  {:amount 20.0, :code "GBP", :probability 0.8}
+=>  {:amount 20.0M, :code "GBP", :tld "uk"}
 
-(parse-price "£20.0" "http://www.r.co.uk")
-=>  {:amount 20.0, :code "GBP", :probability 0.8}
-
-
-
+(parse-price "NZD 20.0")
+=>  {:amount 10M, :code "NZD", :tld nil}
 </pre>
 
 
