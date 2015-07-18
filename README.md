@@ -31,7 +31,7 @@ These rules are currently a speculative approximation with much room for improve
 
 <pre>
 (ns testproject.core
-  (:require [currencydetect.core :refer [parse-price]))
+  (:require [currencydetect.core :refer [parse-price]]))
 
 (parse-price "£20.00" "http://www.r.co.uk")
 =>  {:amount 20.0M, :code "GBP", :tld "uk"}
