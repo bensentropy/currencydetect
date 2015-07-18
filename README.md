@@ -23,9 +23,13 @@ These rules are currently a speculative approximation with much room for improve
 * http://research.domaintools.com/statistics/tld-counts/
 * https://en.wikipedia.org/wiki/Decimal_mark
 * http://www.xe.com/symbols.php
+* http://data.worldbank.org/indicator/NY.GDP.MKTP.CD
 
 ## Installation
 
+#### Leiningen
+
+[![Clojars Project](http://clojars.org/currencydetect/latest-version.svg)](http://clojars.org/currencydetect)
 
 ## Usage
 
@@ -36,7 +40,7 @@ These rules are currently a speculative approximation with much room for improve
 (parse-price "£20.00" "http://www.r.co.uk")
 =>  {:amount 20.0M, :code "GBP", :tld "uk"}
 
-(parse-price "NZD 20.0")
+(parse-price "NZD 10")
 =>  {:amount 10M, :code "NZD", :tld nil}
 </pre>
 
