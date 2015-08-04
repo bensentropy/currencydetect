@@ -9,7 +9,10 @@
     (is (= (extract-price "$10,001.00") 10001.0M))
     (is (= (extract-price "$10.001,00") 10001.0M))
     (is (= (extract-price "$1,0.0.01,00") 10001.0M))
-    (is (= (extract-price "£234,234.0") 234234.0M))))
+    (is (= (extract-price "£234,234") 234234.0M))
+    (is (= (extract-price "10,000") 10000M))
+    (is (= (extract-price "10.000") 10000M))
+    (is (= (extract-price "10,000,000") 10000000M))))
 
 (deftest symbol-max-gdp-test
   (testing "Currency code of largest country is returned for currency symbol"
@@ -42,8 +45,8 @@
 
 (deftest parse-price-test
   (testing ""
-    (is (= (parse-price "20.0" "http://www.r.co.uk")
-           {:amount 20.0M, :code "GBP" :tld "uk"}))
+    (is (= (parse-price "20" "http://www.r.co.uk")
+           {:amount 20M, :code "GBP" :tld "uk"}))
     (is (= (parse-price "30,00" "http://www.r.dj")
            {:amount 30.0M, :code "EUR" :tld "dj"}))
-    (is (= (parse-price "$40") {:amount 40.0M, :code "USD" :tld nil}))))
+    (is (= (parse-price "$40") {:amount 40.0M, :code "USD" :tld nil})) ))

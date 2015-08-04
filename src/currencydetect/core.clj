@@ -33,7 +33,7 @@
   (let [price-str (-> (re-find #"[\d,\.]+" text)
                       (str/replace "," ".")
                       str/reverse)
-        change  #(if (= % -1) 0 %) ; modify if no decimal place is found
+        change #(if (or (= -1 %) (not= 2 %)) 0 %) ; modify if no decimal place is found
         decimal-pos (-> price-str (.indexOf ".") change)
         price (str/replace price-str "." "")]
     (bigdec (str/reverse (utils/str-insert price "." decimal-pos)))))

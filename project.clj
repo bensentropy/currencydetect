@@ -1,4 +1,4 @@
-(defproject currencydetect "0.1.1"
+(defproject currencydetect "0.1.2"
   :description "A libary for currency code extraction from natural language"
   :url "http://github.com/bensentropy/currencydetect"
   :license {:name "Eclipse Public License"
